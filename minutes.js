@@ -30,8 +30,14 @@ const minutesToWords = (minuteNum) => {
 const isToTheHour = (minuteNum) => {
     validateMinuteNum(minuteNum);
 
-    return minuteNum > 33;
-}
+    return minuteNum > 32;
+};
+
+const isOClock = (minuteNum) => {
+    validateMinuteNum(minuteNum);
+
+    return minuteNum < 3 || minuteNum > 57;
+};
 
 const validateMinuteNum = (minuteNum) => {
     const rangeErrorMsg = ('minuteNum must be a number between 0 and 59.');
@@ -55,3 +61,4 @@ const validateMinuteNum = (minuteNum) => {
 
 exports.minutesToWords = minutesToWords;
 exports.isToTheHour = isToTheHour;
+exports.isOClock = isOClock;

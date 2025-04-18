@@ -1,5 +1,5 @@
 const { describe, expect, test } = require('@jest/globals');
-const { minutesToWords, isToTheHour } = require('./minutes');
+const { minutesToWords, isToTheHour, isOClock } = require('./minutes');
 
 const testValidation = (description, f) => {
     describe(description, () => {
@@ -66,10 +66,36 @@ describe('When minutesNum is less than 33, isToTheHour returns false', () => {
     }
 });
 
-describe('When minutesNum is greater than 33, isToTheHour returns true', () => {
-    for (let i=34; i<60; i++) {
+describe('When minutesNum is greater than 32, isToTheHour returns true', () => {
+    for (let i=33; i<60; i++) {
         test(`${i} returns true`, () => {
             expect(isToTheHour(i)).toBe(true);
         });
     }  
+});
+
+testValidation('isOClock: validation', isOClock);
+
+describe('When minutesNum is less than 3, isOClock returns true', () => {
+    for (let i=0; i<3; i++) {
+        test(`${i} returns true`, () => {
+            expect(isOClock(i)).toBe(true);
+        });
+    }
+});
+
+describe('When minutesNum is greater than 3 and less than 58, isOClock returns false', () => {
+    for (let i=3; i<58; i++) {
+        test(`${i} returns false`, () => {
+            expect(isOClock(i)).toBe(false);
+        });
+    }
+});
+
+describe('When minutesNum is 58 or 59, isOClock returns true', () => {
+    for (let i=58; i<=59; i++) {
+        test(`${i} returns true`, () => {
+            expect(isOClock(i)).toBe(true);
+        });
+    }
 });
